@@ -1,5 +1,9 @@
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,5 +23,19 @@ import java.sql.Connection;
     public String user = null;
     public String pass =null;
     Connection link = null;
- 
+    
+    /**
+     * Este metodo establece la conexión con la BD
+     * @return link 
+     */
+    public Connection conectar(){
+        
+        try {
+            link = DriverManager.getConnection(url,user,pass);
+        } catch (SQLException ex) {
+            Logger.getLogger(AccesoBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+   return link;
+   }
 }
