@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -63,5 +64,26 @@ class AccesoBD {
         
 
     }
+    /**
+     * Metodo para eliminar uno de los registros
+     * @param tabla  Nombre de la tabla de la que quiero eliminar el registro
+     * @param columna Este parametro se pide por pantalla y con el elegiremos la
+     * columna por la que queremos elegir nuestro registro a borrar
+     * @param registroEliminar También se pide por pantalla, introduciremos el registro que queremos borrar
+     */
+    public void Borrar(String tabla ) {
+ 
+            String columna =  JOptionPane.showInputDialog (null, "Introduce el campo por el que vas a elegir el registro a eliminar");
+            String registroEliminar = JOptionPane.showInputDialog(null, "Introduce el registro a eliminar");
+            
+         try {        
+            PreparedStatement stmt = link.prepareStatement("DELETE FROM " +tabla+" WHERE "+columna+" =" +registroEliminar);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccesoBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+}     
 
-}
+
+
