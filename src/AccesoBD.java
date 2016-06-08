@@ -83,7 +83,27 @@ class AccesoBD {
             Logger.getLogger(AccesoBD.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-}     
+}
+   /**
+     * Metodo para actualizar uno de los registros
+     * @param tabla  Nombre de la tabla de la que quiero actualizar el registro
+     * @param columna Este parametro se pide por pantalla y con el elegiremos la
+     * columna por la que queremos elegir nuestro registro a actualizar
+     * @param datoActualizar nombre de la columna que vamos a actualizar
+     * @param datosNuevos nuevo dato a introducir
+     */
+        public void actualizar(String tabla,String datoActualizar,String datosNuevos){
+            String columna =  JOptionPane.showInputDialog (null, "Introduce el campo por el que vas a elegir el registro a actualizar");
+            String registroActualizar = JOptionPane.showInputDialog(null, "Introduce el registro a actualizar");
+        try {
+            PreparedStatement st= link.prepareStatement("UPDATE "+ tabla+" SET "+datoActualizar+"= "+datosNuevos+ "WHERE"+columna+" ="+registroActualizar);
+            st.executeUpdate();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al actualizar "+ex.getMessage() );
+        }
+    }
+}
 
 
 
